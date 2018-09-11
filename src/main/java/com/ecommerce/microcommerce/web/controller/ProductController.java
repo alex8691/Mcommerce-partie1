@@ -52,6 +52,16 @@ public class ProductController {
         return produitsFiltres;
     }
 
+    //Liste des produits triés par ...
+    @ApiOperation(value = "Liste des produits tiés par @arg")
+    @GetMapping(value = "/ProduitsTri")
+    private List<Product> trierProduitsParOrdreAlphabetique(@RequestParam(defaultValue = "id") String arg) {
+        if (arg.toLowerCase().equals("nom")) {
+            return productDao.findAllByOrderByNomAsc();
+        }
+        return productDao.findAll();
+    }
+
 
     //Récupérer un produit par son Id
     @ApiOperation(value = "Récupère un produit grâce à son ID à condition que celui-ci soit en stock!")
